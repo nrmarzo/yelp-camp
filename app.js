@@ -20,14 +20,21 @@ var commentRoutes = require("./routes/comments"),
 //   useNewUrlParser: true,
 //   useFindAndModify: false,
 // });
-mongoose.connect(
-  "mongodb+srv://nrmarzo:nrcrusader@cluster0.ijiq2.mongodb.net/yelp_camp?retryWrites=true&w=majority",
-  {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useFindAndModify: false,
-  }
-);
+mongoose
+  .connect(
+    "mongodb+srv://nrmarzo:nrcrusader@cluster0.ijiq2.mongodb.net/yelp_camp?retryWrites=true&w=majority",
+    {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+      useFindAndModify: false,
+    }
+  )
+  .then(() => {
+    console.log("Connected to DB!");
+  })
+  .catch((err) => {
+    console.log("Error:", err.message);
+  });
 
 mongoose.set("useUnifiedTopology", false);
 app.set("view engine", "ejs");
