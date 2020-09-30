@@ -11,7 +11,8 @@ var express = require("express"),
   User = require("./models/user"),
   seedDB = require("./seeds");
 
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
+const db = process.env.MONGODB_URL;
 
 var commentRoutes = require("./routes/comments"),
   campgroundRoutes = require("./routes/campgrounds"),
@@ -23,14 +24,11 @@ var commentRoutes = require("./routes/comments"),
 //   useFindAndModify: false,
 // });
 mongoose
-  .connect(
-    "mongodb+srv://nrmarzo:nrcrusader@cluster0.ijiq2.mongodb.net/yelp_camp?retryWrites=true&w=majority",
-    {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-      useFindAndModify: false,
-    }
-  )
+  .connect(db, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useFindAndModify: false,
+  })
   .then(() => {
     console.log("Connected to DB!");
   })
