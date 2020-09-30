@@ -19,14 +19,21 @@ var commentRoutes = require("./routes/comments"),
   campgroundRoutes = require("./routes/campgrounds"),
   indexRoutes = require("./routes/index");
 
-mongoose.connect(devDB, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-  useFindAndModify: false,
-});
+mongoose
+  .connect(devDB, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useFindAndModify: false,
+  })
+  .then(() => {
+    console.log("Connected to DB!");
+  })
+  .catch((err) => {
+    console.log("Error:", err.message);
+  });
 
 // mongoose
-//   .connect(db, {
+//   .connect(deployDB, {
 //     useUnifiedTopology: true,
 //     useNewUrlParser: true,
 //     useFindAndModify: false,
