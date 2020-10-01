@@ -12,15 +12,16 @@ var express = require("express"),
   seedDB = require("./seeds");
 
 const port = process.env.PORT || 3000;
-const deployDB = process.env.MONGODB_URL;
-const devDB = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
+const db = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
 
 var commentRoutes = require("./routes/comments"),
   campgroundRoutes = require("./routes/campgrounds"),
   indexRoutes = require("./routes/index");
 
+console.log(db);
+
 mongoose
-  .connect(deployDB, {
+  .connect(db, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useFindAndModify: false,
@@ -31,19 +32,6 @@ mongoose
   .catch((err) => {
     console.log("Error:", err.message);
   });
-
-// mongoose
-//   .connect(deployDB, {
-//     useUnifiedTopology: true,
-//     useNewUrlParser: true,
-//     useFindAndModify: false,
-//   })
-//   .then(() => {
-//     console.log("Connected to DB!");
-//   })
-//   .catch((err) => {
-//     console.log("Error:", err.message);
-//   });
 
 mongoose.set("useUnifiedTopology", false);
 app.set("view engine", "ejs");
