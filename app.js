@@ -20,7 +20,7 @@ var commentRoutes = require("./routes/comments"),
   indexRoutes = require("./routes/index");
 
 mongoose
-  .connect(devDB, {
+  .connect(deployDB, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useFindAndModify: false,
